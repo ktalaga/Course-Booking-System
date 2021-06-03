@@ -15,9 +15,11 @@ public class Customer {
     private Long id;
 
     @Column(name = "name")
+    @Basic(optional=false)
     private String name;
 
     @Column(name = "town")
+    @Basic(optional=false)
     private String town;
 
     @Column(name = "age")

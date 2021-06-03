@@ -30,7 +30,7 @@ public class CourseController {
     public ResponseEntity getCoursesByCustomerName(
             @RequestParam(name = "customerName") String customerName
     ){
-        return new ResponseEntity(courseRepository.findByBookingsCustomerName(customerName), HttpStatus.OK);
+        return new ResponseEntity(courseRepository.findByBookingsCustomerNameIgnoreCase(customerName), HttpStatus.OK);
     }
 
 }

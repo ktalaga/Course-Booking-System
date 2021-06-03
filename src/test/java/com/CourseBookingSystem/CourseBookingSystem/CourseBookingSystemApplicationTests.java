@@ -36,24 +36,42 @@ class CourseBookingSystemApplicationTests {
 	@Test
 	void canGetAllCoursesWithRating() {
 		List<Course> extractedCourses = courseRepository.findByRating(6);
-		assertEquals(1, extractedCourses.size());
+		assertEquals(3, extractedCourses.size());
 	}
 
 	@Test
 	void canGetAllCustomersPerCourse() {
-		List<Customer> extractedCustomer = customerRepository.findByBookingsCourseName("Python Fundamentals");
-		assertEquals(2, extractedCustomer.size());
+		List<Customer> extractedCustomer = customerRepository.findByBookingsCourseNameIgnoreCase("Python Fundamentals");
+		assertEquals(5, extractedCustomer.size());
 	}
 
 	@Test
 	void canGetAllCoursesPerCustomer() {
-		List<Course> extractedCourses = courseRepository.findByBookingsCustomerName("Konrad Talaga");
+		List<Course> extractedCourses = courseRepository.findByBookingsCustomerNameIgnoreCase("Konrad Talaga");
+		assertEquals(3, extractedCourses.size());
+	}
+
+	@Test
+	void canGetAllCoursesPerCustomerLowerCase() {
+		List<Course> extractedCourses = courseRepository.findByBookingsCustomerNameIgnoreCase("konrad talaga");
 		assertEquals(3, extractedCourses.size());
 	}
 
 	@Test
 	void canGetAllBookingsForGivenDate() {
 		List<Booking> extractedBookings = bookingRepository.findByDate("06.06.2021");
-		assertEquals(2, extractedBookings.size());
+		assertEquals(4, extractedBookings.size());
+	}
+
+	@Test
+	void canGetAllCustomersInTownForCourse() {
+		List<Customer> extractedCustomers = customerRepository.findByBookingsCourseNameAndBookingsCourseTownIgnoreCase("Python Fundamentals", "Glasgow");
+		assertEquals(3, extractedCustomers.size());
+	}
+
+	@Test
+	void canGetCustomersByAgeInTown() {
+		List<Customer> extractedCustomers = customerRepository.findByAgeGreaterThanAndBookingsCourseNameAndBookingsCourseTownIgnoreCase(22,"Python Fundamentals", "Glasgow");
+		assertEquals(1, extractedCustomers.size());
 	}
 }
