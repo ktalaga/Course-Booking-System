@@ -1,20 +1,37 @@
 package com.CourseBookingSystem.CourseBookingSystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "courses")
 public class Course {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "town")
     private String town;
-    private int ranting;
+
+    @Column(name = "rating")
+    private int rating;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"course"})
     private List<Booking> bookings;
 
-    public Course(String name, String town, int ranting, List<Booking> bookings) {
+    public Course(String name, String town, int rating, List<Booking> bookings) {
         this.name = name;
         this.town = town;
-        this.ranting = ranting;
+        this.rating = rating;
         this.bookings = new ArrayList<Booking>();
     }
 
@@ -37,12 +54,12 @@ public class Course {
         this.town = town;
     }
 
-    public int getRanting() {
-        return ranting;
+    public int getRating() {
+        return rating;
     }
 
-    public void setRanting(int ranting) {
-        this.ranting = ranting;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public List<Booking> getBookings() {
