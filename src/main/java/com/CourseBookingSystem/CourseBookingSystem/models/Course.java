@@ -28,7 +28,7 @@ public class Course {
     @JsonIgnoreProperties({"course"})
     private List<Booking> bookings;
 
-    public Course(String name, String town, int rating, List<Booking> bookings) {
+    public Course(String name, String town, int rating) {
         this.name = name;
         this.town = town;
         this.rating = rating;
