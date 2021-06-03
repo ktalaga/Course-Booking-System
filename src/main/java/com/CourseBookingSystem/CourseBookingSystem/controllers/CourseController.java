@@ -26,4 +26,11 @@ public class CourseController {
         return new ResponseEntity(courseRepository.findByRating(rating), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/courses/customer")
+    public ResponseEntity getCoursesByCustomerName(
+            @RequestParam(name = "customerName") String customerName
+    ){
+        return new ResponseEntity(courseRepository.findByBookingsCustomerName(customerName), HttpStatus.OK);
+    }
+
 }

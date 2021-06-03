@@ -43,4 +43,10 @@ class CourseBookingSystemApplicationTests {
 		List<Customer> extractedCustomer = customerRepository.findByBookingsCourseName("Python Fundamentals");
 		assertEquals(2, extractedCustomer.size());
 	}
+
+	@Test
+	void canGetAllCoursesPerCustomer() {
+		List<Course> extractedCourses = courseRepository.findByBookingsCustomerName("Konrad Talaga");
+		assertEquals(3, extractedCourses.size());
+	}
 }
