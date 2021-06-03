@@ -1,5 +1,6 @@
 package com.CourseBookingSystem.CourseBookingSystem;
 
+import com.CourseBookingSystem.CourseBookingSystem.models.Booking;
 import com.CourseBookingSystem.CourseBookingSystem.models.Course;
 import com.CourseBookingSystem.CourseBookingSystem.models.Customer;
 import com.CourseBookingSystem.CourseBookingSystem.repositories.BookingRepository;
@@ -48,5 +49,11 @@ class CourseBookingSystemApplicationTests {
 	void canGetAllCoursesPerCustomer() {
 		List<Course> extractedCourses = courseRepository.findByBookingsCustomerName("Konrad Talaga");
 		assertEquals(3, extractedCourses.size());
+	}
+
+	@Test
+	void canGetAllBookingsForGivenDate() {
+		List<Booking> extractedBookings = bookingRepository.findByDate("06.06.2021");
+		assertEquals(2, extractedBookings.size());
 	}
 }
